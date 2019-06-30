@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load rbac_tags %}
+
+{% block css %}
+    <style>
+        tr.active {
+            border-left: 3px solid #fdc00f;
+        }
+
+        table {
+            font-size: 12px;
+        }
+
+        .panel-body {
+            font-size: 12px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <i class="fa fa-area-chart" aria-hidden="true"></i>菜单管理
+
+                <a class="right btn btn-success btn-xs" href="{% url 'menu_add' %}">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> 添加菜单
+                </a>
+            </div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>图标</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in menu_queryset %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td><a href="?mid={{ row.id }}">{{ row.title }}</a></td>
+                        <td><i class="{{ row.icon }}" aria-hidden="true"></i></td>
+                            <td>
+                                    <a style="color: #333333;" href="{% url 'menu_edit' mid=row.id %}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    |
+                                    <a style="color: #d9534f;" href="{% url 'menu_del' mid=row.id %}"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+        </div>
+    </div>
+
+
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>权限管理
+                <a class="right btn btn-success btn-xs" href="{% url 'menu_add' %}">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> 添加权限
+                </a>
+            </div>
+
+
+            <!-- Table -->
+        <table class="table dropdown">
+            <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>URL</th>
+                        <th>CODE</th>
+                        <th>菜单</th>
+                        <th>所属菜单</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in permission_queryset %}
+
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td>{{ row.title }}</td>
+                        <td>{{ row.url }}</td>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.parent }}</td>
+                        <td>{{ row.menu.title }}</td>
+                            <td>
+                                    <a style="color: #333333;" href="{% url 'menu_edit' mid=row.id %}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    |
+                                    <a style="color: #d9534f;" href="{% url 'menu_del' mid=row.id %}"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                    </tr>
+                {% endfor %}
+
+                {% if parent_queryset %}
+
+                    {% for row in parent_queryset %}
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.title }}</td>
+                            <td>{{ row.url }}</td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.parent }}</td>
+                            <td>{{ row.menu.title }}</td>
+                            <td>
+                                    <a style="color: #333333;" href="{% url 'menu_edit' mid=row.id %}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    |
+                                    <a style="color: #d9534f;" href="{% url 'menu_del' mid=row.id %}"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+        </table>
+        </div>
+    </div>
+
+{% endblock %}
