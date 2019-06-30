@@ -35,5 +35,5 @@ CRM，客户关系管理系统（Customer Relationship Management）。企业用
     ├─views 视图<br>
 
 项目截图：<br>
-  https://github.com/limou09/crm-django/blob/master/1.png<br>
-  https://github.com/limou09/crm-django/blob/master/2.png<br>
+  ![image](https://github.com/limou09/crm-django/blob/master/1.png)<br>
+  ![image](https://github.com/limou09/crm-django/blob/master/2.png)<br>
