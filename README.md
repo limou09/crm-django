@@ -4,8 +4,8 @@ CRM，客户关系管理系统（Customer Relationship Management）。企业用
 
 
 环境依赖：
-  django 1.9.1
-  python 3.6
+  django 1.9.1<br>
+  python 3.6<br>
   
   
 简单使用：
